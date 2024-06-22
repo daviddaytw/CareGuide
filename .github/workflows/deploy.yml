@@ -1,0 +1,26 @@
+name: Deploy Website
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  publish:
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+  
+      - name: Install npm packages
+        run: npm ci
+      - name: Build frontend bundle
+        run: npm run build
+  
+      - name: Upload to server
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ftp.davidday.tw
+          username: home-nurse@davidday.tw
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./out/

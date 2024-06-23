@@ -23,4 +23,4 @@ jobs:
           server: ftp.davidday.tw
           username: home-nurse@davidday.tw
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./out/
+          local-dir: ./build/

@@ -1,10 +1,12 @@
 import React from 'react';
 import Chat from './components/Chat';
 import './App.css';
+import { Navbar } from './components/Navbar';
 
 function App() {
   return (
-    <div className="App">
+    <div className="h-screen flex flex-col">
+      <Navbar />
       <Chat />
     </div>
   );

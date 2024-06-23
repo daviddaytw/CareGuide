@@ -4,48 +4,81 @@ import Message from './Message';
 import './Chat.css';
 import sendIcon from '../assets/send-icon.png'; // Add send icon image in assets
 import micIcon from '../assets/mic-icon.png';   // Add microphone icon image in assets
+import { StopCircleIcon } from '@heroicons/react/24/solid';
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isRecording, setIsRecording] = useState(false);
 
-  const handleSend = () => {
-    if (input.trim()) {
-      setMessages([...messages, { text: input, sender: 'user' }]);
-      setInput('');
+  const handleSend = async () => {
+    const inputText = input.trim()
+    if (inputText) {
 
-      // Simulate bot response
+      setMessages((prev) => [
+        ...prev,
+        { text: inputText, sender: 'user'},
+      ])
+      setInput('')
+
+      const headers = new Headers()
+      headers.append('Content-Type', "application/json")
+      const requestOptions = {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({
+          content: inputText
+        }),
+        redirect: "follow",
+      }
+      const res = await fetch('http://10.56.204.139:5003/uploadText', requestOptions)
+      const data = await res.json()
+  
+  
       setTimeout(() => {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { text: 'Bot response for: ' + input, sender: 'bot' },
-        ]);
+        setMessages((prev) => [
+          ...prev,
+          { text: data.responseStringFromAI, sender: 'bot', audio: `http://10.56.204.139:5003/get_audio?${Math.random()}` },
+        ])
       }, 1000);
+
     }
   };
 
-  const toggleRecording = () => {
-    setIsRecording((prevIsRecording) => !prevIsRecording);
-  };
+  const startRecording = () => {
+    setIsRecording(true)
+  }
+
+  const stopRecording = () => {
+    setIsRecording(false)
+  }
 
   const onData = (recordedBlob) => {
     // Handle real-time data if needed
-  };
+  };  
 
-  const onStop = (recordedBlob) => {
-    const audioUrl = URL.createObjectURL(recordedBlob.blob);
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { text: 'Audio message', sender: 'user', audio: audioUrl },
-    ]);
+  const onStop = async (recording) => {
+    const formdata = new FormData()
+    formdata.append("file", recording.blob, "speech.mp3")
 
-    // Simulate bot response to audio message
+    const requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    }
+    const res = await fetch('http://10.56.204.139:5003/uploadFile', requestOptions)
+    const data = await res.json()
+
+    setMessages((prev) => [
+      ...prev,
+      { text: data.transcription, sender: 'user'},
+    ])
+
     setTimeout(() => {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { text: 'Bot response to your audio message', sender: 'bot' },
-      ]);
+      setMessages((prev) => [
+        ...prev,
+        { text: data.responseStringData, sender: 'bot', audio: `http://10.56.204.139:5003/get_audio?${Math.random()}` },
+      ])
     }, 1000);
   };
 
@@ -56,7 +89,7 @@ const Chat = () => {
           <Message key={index} text={msg.text} sender={msg.sender} audio={msg.audio} />
         ))}
       </div>
-      <div className="input-container">
+      <div className={`flex gap-3 ${isRecording && 'hidden'}`}>
         <input
           type="text"
           value={input}
@@ -66,18 +99,21 @@ const Chat = () => {
         <button className="send-button" onClick={handleSend}>
           <img src={sendIcon} alt="Send" />
         </button>
-        <button className="record-button" onClick={toggleRecording}>
+        <button className="record-button" onClick={startRecording}>
           <img src={micIcon} alt="Record" />
         </button>
       </div>
-      <ReactMic
-        record={isRecording}
-        className="sound-wave"
-        onStop={onStop}
-        onData={onData}
-        strokeColor="#000000"
-        backgroundColor="#FF4081"
-      />
+      <div className={ isRecording ? 'flex block' : 'hidden' }>
+        <ReactMic
+          record={isRecording}
+          visualSetting="frequencyBars"
+          onStop={onStop}
+          onData={onData}
+          strokeColor="#000000"
+          backgroundColor="#FF4081"
+        />
+        <button onClick={stopRecording}><StopCircleIcon className='h-10'/></button>
+      </div>
     </div>
   );
 };

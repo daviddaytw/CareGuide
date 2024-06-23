@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center; /* Center horizontally */
-    height: 100vh;
+    height: 100%;
     background-color: #86a4b1;
     padding: 20px;
     box-sizing: border-box;
@@ -18,15 +18,6 @@
     display: flex;
     flex-direction: column;
     align-items: center; /* Center messages */
-  }
-  
-  .input-container {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center horizontally */
-    padding: 10px 20px;
-    box-sizing: border-box;
-    gap: 10px; /* Add more gap for better spacing */
   }
   
   input {
@@ -70,7 +61,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #ff4081;
+    background-color: #4089ff;
     color: white;
     border: none;
     cursor: pointer;
@@ -91,16 +82,7 @@
     box-sizing: border-box;
   }
   
-  .sound-wave {
-    width: 100%;
-    display: none; /* This line hides the ReactMic component */
-  }
-  
   @media (max-width: 600px) {
-    .input-container, .audio-container {
-      flex-direction: column;
-    }
-  
     .message-text {
       max-width: 80%;
     }

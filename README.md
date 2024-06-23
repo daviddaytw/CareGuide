@@ -4,6 +4,9 @@
 ## Web UI
 
 ### Getting Started
+#### `npm install --legacy-peer-deps`
+
+Install the dependencies.
 
 #### `npm start`
 

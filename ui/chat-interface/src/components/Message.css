@@ -1,0 +1,50 @@
+.message {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .message.user {
+    justify-content: flex-end;
+  }
+  
+  .message.bot {
+    justify-content: flex-start;
+  }
+  
+  .message.user .message-text {
+    background-color: #d1e7f0;
+    margin-right: 10px; /* Space between the message and the user image */
+  }
+  
+  .message.bot .message-text {
+    background-color: #f0d1d1;
+    margin-left: 10px; /* Space between the message and the bot image */
+  }
+  
+  .message-text {
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 60%;
+    word-wrap: break-word;
+  }
+  
+  .profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  @media (max-width: 600px) {
+    .message-text {
+      max-width: 80%;
+    }
+  
+    .profile-image {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  

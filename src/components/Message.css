@@ -20,7 +20,8 @@
   }
   
   .message.bot .message-text {
-    background-color: #f0d1d1;
+    background-color: #2a7fba;
+    color: white;
     margin-left: 10px; /* Space between the message and the bot image */
   }
   

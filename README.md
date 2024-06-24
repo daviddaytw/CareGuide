@@ -1,4 +1,6 @@
 # CareGuide
+[Go to the app](https://careguide.onrender.com/)
+
 
 
 ## Web UI

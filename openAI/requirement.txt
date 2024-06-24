@@ -1,0 +1,5 @@
+Flask==2.0.2
+flask-cors==3.1.1
+openai==0.10.1
+boto3==1.20.67
+python-dotenv==0.19.5

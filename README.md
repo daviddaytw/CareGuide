@@ -46,18 +46,18 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 ### Create an environment
 
 ```bash
-python3 -m venv .venv
+python3 -m venv myvenv
 ```
 
 ### Activate the environment
 ```bash
-. .venv/bin/activate
+source myvenv/bin/activate
 ```
 
 ### Install Flask
 
 ```bash
-pip install flask boto3
+pip install -r requirement.txt
 ```
 
 ### Run the backend server
@@ -65,3 +65,11 @@ pip install flask boto3
 ```bash
 flask --app hello run --host=0.0.0.0 --debug --port=5003
 ```
+
+### Set OpenAI api key and set AWS service
+create `.env` file with the content below 
+`AWS_ACCESS_KEY_ID=your key id
+AWS_SECRET_ACCESS_KEY=ur secret access key`
+
+and follow the [OpenAI api key](https://platform.openai.com/docs/quickstart#:~:text=First%2C%20create%20an%20OpenAI%20account,not%20share%20it%20with%20anyone) to set up Open api key in terminal
+

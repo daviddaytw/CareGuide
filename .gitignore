@@ -26,3 +26,4 @@ openAI/uploads/
 openAI/__pycache__
 openAI/.env
 openAI/openai-env/
+openAI/myvenv/

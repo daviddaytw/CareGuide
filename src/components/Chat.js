@@ -26,7 +26,9 @@ Hello! I'm your personalized AI assistant from the CareGuide team, here to help 
       }),
       redirect: "follow",
     }
-    const res = await fetch('http://10.56.204.139:5003/uploadText', requestOptions)
+    // const res = await fetch('http://10.56.204.139:5003/uploadText', requestOptions)
+    const res = await fetch('http://localhost:5003/uploadText', requestOptions)
+
     const data = await res.json()
 
     console.log(data)
@@ -36,7 +38,9 @@ Hello! I'm your personalized AI assistant from the CareGuide team, here to help 
         ...prev,
         { text: data.replyStringFromAI, sender: 'bot'},
       ])
-      const audio = new Audio(`http://10.56.204.139:5003/get_audio?${Math.random()}`)
+      // const audio = new Audio(`http://10.56.204.139:5003/get_audio?${Math.random()}`)
+      const audio = new Audio(`http://localhost:5003/get_audio?${Math.random()}`)
+
       await audio.play()
       setIsProcessing(false)
     }, 1000);
@@ -79,7 +83,9 @@ Hello! I'm your personalized AI assistant from the CareGuide team, here to help 
       body: formdata,
       redirect: "follow",
     }
-    const res = await fetch('http://10.56.204.139:5003/uploadFile', requestOptions)
+    // const res = await fetch('http://10.56.204.139:5003/uploadFile', requestOptions)
+    const res = await fetch('http://localhost:5003/uploadFile', requestOptions)
+
     const data = await res.json()
 
     setMessages((prev) => [

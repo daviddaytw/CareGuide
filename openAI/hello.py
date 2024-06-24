@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from flask import Flask, request, jsonify,send_file
+from flask import Flask, request, jsonify,send_file,render_template
 from openai import OpenAI
 from flask_cors import CORS
 import string
@@ -9,7 +9,9 @@ from BedrockAgent import BedrockAgent
 
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='',
+                  static_folder='build',
+                  template_folder='build')
 app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 CORS(app) 
@@ -17,8 +19,8 @@ client = OpenAI()
 agent = BedrockAgent()
 
 @app.route("/")
-def hello_world():
-    return "<p>Hewewewewllo, World! come on please restrrat the server</p>"
+def hello():
+    return render_template("index.html")
 
 #user type text and get string reply from AI
 @app.route('/uploadText', methods=['POST'])

@@ -73,5 +73,23 @@ create `.env` file with the content below
 `AWS_ACCESS_KEY_ID=your key id
 AWS_SECRET_ACCESS_KEY=ur secret access key`
 
-and follow the [OpenAI api key](https://platform.openai.com/docs/quickstart#:~:text=First%2C%20create%20an%20OpenAI%20account,not%20share%20it%20with%20anyone) to set up Open api key in terminal
+and follow the [OpenAI api key](https://platform.openai.com/docs/quickstart#:~:text=First%2C%20create%20an%20OpenAI%20account,not%20share%20it%20with%20anyone) to set up OpenApi key in terminal
+
+### Demo
+Home page:
+![home page](./demo-pics/home%20page.png)
+How to take care of patient:
+![How to Take Care](./demo-pics/waiting%20for%20reply.png)
+Ask questions:
+![How to Take Care](./demo-pics/recording%20voice.png)
+Reply:
+![Reply from AI](./demo-pics/reply%20demo.png)
+
+
+
+
+### Contributors
+* [David](https://github.com/daviddaytw)
+* [Sheng Hao](https://github.com/gyes51y767p)
+* [Yash](https://github.com/yashthakur22)
 
